@@ -44,6 +44,12 @@ def home(request: Request):
     context = {"request": request, "file": "home.html"}
     return templates.TemplateResponse("base.html", context)
 
+@app.get("/shop")
+@limiter.limit("5/second")
+def shop():
+    response = RedirectResponse(url='https://jgltechnologies.shopify.com/')
+    return response
+
 
 @app.get("/contact")
 @limiter.limit("5/second")
